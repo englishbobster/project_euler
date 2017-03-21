@@ -16,11 +16,25 @@ defmodule PrimeFactor do
     true
   end
 
+  defp largest_prime_factor(value, div) when div < value do
+    cond do
+      rem(value, div) == 0 ->
+        largest_prime_factor(round(value/div), 2)
+      true ->
+        largest_prime_factor(value, div + 1)
+    end
+  end
+  defp largest_prime_factor(value, _div) do
+    value
+  end
 
-  
+  def largest_prime_factor(value) do
+    largest_prime_factor(value, 2)
+  end
+
 end
-#value_one = 13195
-#IO.puts "Prime factors of #{value_one} are: #{PrimeFactor.prime_factors_of(value_one)} "
+value_one = 13195
+IO.puts "Largest prime factor of #{value_one} is: #{PrimeFactor.largest_prime_factor(value_one)} "
 
-#value_two = 600851475143
-#IO.puts "Prime factors of #{value_two} are: #{PrimeFactor.prime_factors_of(value_two)} "
+value_two = 600851475143
+IO.puts "Largest prime factor of #{value_two} is: #{PrimeFactor.largest_prime_factor(value_two)} "
